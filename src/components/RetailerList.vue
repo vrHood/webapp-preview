@@ -38,7 +38,7 @@
         <v-card-text class="pa-4">
           <v-row>
             <v-col cols="4">
-              <h2>{{ retailer.name }}</h2>
+              <h1 class="primary--text ml-1 mb-4">{{ retailer.name }}</h1>
 
               <v-row>
                 <v-col cols="1">
@@ -118,10 +118,10 @@
             </v-col>
 
             <v-col cols="6">
-              <h2>Geschichte</h2>
+              <h2 class="primary--text">Geschichte</h2>
               {{ retailer.geschichte }}
 
-              <h2 class="mt-4">Sortiment</h2>
+              <h2 class="mt-4 primary--text">Sortiment</h2>
               {{ retailer.sortiment }}
 
               <div class="mt-4 ml-3">
