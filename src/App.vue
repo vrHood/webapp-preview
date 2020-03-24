@@ -13,7 +13,12 @@
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
         :zoom="14"
         style="width: 100%; height: 100%"
-        :options="{ styles: map }"
+        :options="{
+          streetViewControl: false,
+          fullscreenControl: false,
+          mapTypeControl: false,
+          styles: map
+        }"
       >
         <GmapMarker
           :key="index"
