@@ -13,6 +13,7 @@
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
         :zoom="14"
         style="width: 100%; height: 100%"
+        :options="{ styles: map }"
       >
         <GmapMarker
           :key="index"
@@ -55,7 +56,70 @@ export default {
   data() {
     return {
       retailers: [],
-      retailer: {}
+      retailer: {},
+      map: [
+        {
+          featureType: "administrative",
+          elementType: "geometry",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "administrative.land_parcel",
+          elementType: "labels",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels.text",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "road",
+          elementType: "labels.icon",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "road.local",
+          elementType: "labels",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        },
+        {
+          featureType: "transit",
+          stylers: [
+            {
+              visibility: "off"
+            }
+          ]
+        }
+      ]
     };
   },
   methods: {
