@@ -24,9 +24,10 @@
         :items-per-page="5"
         class="elevation-1"
         style="height:100%"
+        :search="search"
       >
         <template v-slot:item.actions="{ item }"
-          ><v-btn @click="select(item)" text
+          ><v-btn @click="selectRetailer(item)" text
             ><v-icon>mdi-eye-outline</v-icon></v-btn
           ></template
         >
@@ -82,12 +83,13 @@ export default {
   components: {},
 
   props: {
-    retailers: Array,
-    retailer: Object
+    retailers: Array
   },
 
   data() {
     return {
+      retailer: {},
+      search: "",
       dialog: false,
       headers: [
         {
@@ -99,7 +101,7 @@ export default {
         {
           text: "Kategorie",
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "namenderfirma"
         },
         { text: "", value: "actions", sortable: false }
@@ -109,18 +111,12 @@ export default {
 
   computed: {},
 
-  watch: {
-    retailer() {
-      this.dialog = true;
-    }
-  },
+  watch: {},
 
   methods: {
-    select: {
-      deep: true,
-      handler() {
-        this.dialog = true;
-      }
+    selectRetailer(retailer) {
+      this.dialog = true;
+      this.retailer = retailer;
     }
   },
 

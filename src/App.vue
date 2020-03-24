@@ -2,12 +2,12 @@
   <div id="app">
     <v-app>
       <retailer-dialog
-        style="position:absolute; top: 10px;left:45%;z-index:9999"
+        style="position:absolute; bottom: 10px;left:45%;z-index:9999"
       ></retailer-dialog>
       <retailer-list
         :retailers="retailers"
-        :retailer="retailer"
         style="position:absolute; top: 10px;left: 10px;z-index:9999"
+        ref="retailerList"
       ></retailer-list>
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
@@ -19,7 +19,7 @@
           v-for="(m, index) in retailers"
           :position="m.position"
           :clickable="true"
-          @click="retailer = m"
+          @click="selectRetailer(m)"
         />
       </GmapMap>
     </v-app>
@@ -58,7 +58,11 @@ export default {
       retailer: {}
     };
   },
-  methods: {},
+  methods: {
+    selectRetailer(retailer) {
+      this.$refs.retailerList.selectRetailer(retailer);
+    }
+  },
 
   async mounted() {
     const { data } = await this.axios.get(
