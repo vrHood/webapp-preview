@@ -139,7 +139,7 @@
       <v-btn
         class="primary mb-3"
         target="_blank"
-        to="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
       >
         Händler Registrierung</v-btn
       ><br />
