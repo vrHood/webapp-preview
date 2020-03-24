@@ -41,7 +41,7 @@
               <h1 class="primary--text ml-1 mb-4">{{ retailer.name }}</h1>
 
               <v-row>
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-map-marker</v-icon>
                 </v-col>
                 <v-col>
@@ -51,7 +51,7 @@
               </v-row>
 
               <v-row>
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-phone-outline</v-icon>
                 </v-col>
                 <v-col>
@@ -61,7 +61,7 @@
               </v-row>
 
               <v-row>
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-email-outline</v-icon>
                 </v-col>
                 <v-col>
@@ -75,7 +75,7 @@
               </v-row>
 
               <v-row v-if="retailer.webseite">
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-web</v-icon>
                 </v-col>
                 <v-col>
@@ -89,7 +89,7 @@
               </v-row>
 
               <v-row v-if="retailer.facebook">
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-facebook</v-icon>
                 </v-col>
                 <v-col>
@@ -103,7 +103,7 @@
               </v-row>
 
               <v-row v-if="retailer.insta">
-                <v-col cols="1">
+                <v-col class="icon-col">
                   <v-icon>mdi-instagram</v-icon>
                 </v-col>
                 <v-col>
@@ -216,5 +216,9 @@ export default {
 
 .impress a {
   color: black;
+}
+
+.icon-col {
+  max-width: 50px;
 }
 </style>
