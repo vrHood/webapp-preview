@@ -136,12 +136,13 @@
     </v-dialog>
 
     <div style="position: relativ:bottom: 0px;" class="impress">
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
+      <v-btn
+        class="primary mb-3"
         target="_blank"
-        >HÄNDLER REGISTRIERUNG</a
+        to="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
       >
-      |
+        Händler Registrierung</v-btn
+      ><br />
       <a href="https://www.vrhood.de/impressum" target="_blank">IMPRESSUM</a> |
       <a href="https://www.vrhood.de/datenschutz" target="_blank"
         >DATENSCHUTZ</a
