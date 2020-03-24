@@ -24,6 +24,10 @@
           :key="index"
           v-for="(m, index) in retailers"
           :position="m.position"
+          :icon="{
+            url: '/info-i_maps.png',
+            scaledSize: { height: 32, width: 32 }
+          }"
           :clickable="true"
           @click="selectRetailer(m)"
         />
