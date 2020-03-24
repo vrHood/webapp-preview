@@ -411,7 +411,9 @@ export default {
       "https://spreadsheets.google.com/feeds/list/1l6Lzh20BLcN_Gl4dvwmZ8cbmyJ5jIuIOx7Pn3KPN0pg/1/public/full?alt=json"
     );
 
-    this.retailers = data.feed.entry.map((x) => ext(x)).filter((x) => x.aktiv);
+    this.retailers = data.feed.entry
+      .map((x) => ext(x))
+      .filter((x) => parseInt(x.aktiv, 10));
 
     console.log(this.retailers);
   }

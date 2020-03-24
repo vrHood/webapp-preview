@@ -1,5 +1,5 @@
 <template>
-  <div v-if="retailers.length">
+  <div v-if="retailers">
     <v-card>
       <div style="background-color: #4ba797;" class="pa-4">
         <img
