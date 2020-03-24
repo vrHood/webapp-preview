@@ -6,8 +6,8 @@
       ></retailer-dialog>
       <retailer-list
         :retailers="retailers"
-        style="position:absolute; top: 10px;left: 10px;z-index:9999"
         ref="retailerList"
+        style="position:absolute; top: 0px;right: 0px;z-index:9999; height: 100%; background-color: white;"
       ></retailer-list>
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
@@ -51,7 +51,7 @@ function ext(row) {
 
   result.position = {
     lat: parseFloat(result.lat),
-    lng: parseFloat(result.long)
+    lng: parseFloat(result.lng)
   };
 
   return result;
@@ -408,10 +408,12 @@ export default {
 
   async mounted() {
     const { data } = await this.axios.get(
-      "https://spreadsheets.google.com/feeds/list/1T8L7wSYH8vdw_ACNw2rT44PIiJ6hGxY2JM33XVVKox8/1/public/full?alt=json"
+      "https://spreadsheets.google.com/feeds/list/1l6Lzh20BLcN_Gl4dvwmZ8cbmyJ5jIuIOx7Pn3KPN0pg/1/public/full?alt=json"
     );
 
-    this.retailers = data.feed.entry.map((x) => ext(x));
+    this.retailers = data.feed.entry.map((x) => ext(x)).filter((x) => x.aktiv);
+
+    console.log(this.retailers);
   }
 };
 </script>

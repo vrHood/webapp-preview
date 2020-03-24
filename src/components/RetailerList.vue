@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 90%" v-if="retailers.length">
+  <div v-if="retailers.length">
     <v-card>
       <div style="background-color: #4ba797;" class="pa-4">
         <img
@@ -21,8 +21,7 @@
       <v-data-table
         :headers="headers"
         :items="retailers"
-        :items-per-page="5"
-        class="elevation-1"
+        :items-per-page="25"
         style="height:100%"
         :search="search"
       >
@@ -35,44 +34,119 @@
     </v-card>
 
     <v-dialog v-model="dialog" max-width="1000">
-      <v-card v-if="retailer.namenderfirma">
+      <v-card v-if="retailer.name">
         <v-card-text class="pa-4">
           <v-row>
             <v-col cols="4">
-              <h2>{{ retailer.namenderfirma }}</h2>
+              <h2>{{ retailer.name }}</h2>
+
               <v-row>
                 <v-col cols="1">
                   <v-icon>mdi-map-marker</v-icon>
                 </v-col>
                 <v-col>
-                  {{ retailer.straßeundhausnummer }}<br />
-                  {{ retailer.postleitzahl }} {{ retailer.stadt }}
+                  {{ retailer.straße }}<br />
+                  {{ retailer.plz }} {{ retailer.stadt }}
                 </v-col>
               </v-row>
+
+              <v-row>
+                <v-col cols="1">
+                  <v-icon>mdi-phone-outline</v-icon>
+                </v-col>
+                <v-col>
+                  {{ retailer.festnetz }}<br />
+                  {{ retailer.mobil }}
+                </v-col>
+              </v-row>
+
               <v-row>
                 <v-col cols="1">
                   <v-icon>mdi-email-outline</v-icon>
                 </v-col>
                 <v-col>
-                  {{ retailer["e-mail"] }}
+                  <a
+                    :href="`mailto: ${retailer.emailkunden}`"
+                    target="_blank"
+                    class="limit-text"
+                    >{{ retailer.emailkunden }}</a
+                  >
+                </v-col>
+              </v-row>
+
+              <v-row v-if="retailer.webseite">
+                <v-col cols="1">
+                  <v-icon>mdi-web</v-icon>
+                </v-col>
+                <v-col>
+                  <a
+                    :href="retailer.webseite"
+                    target="_blank"
+                    class="limit-text"
+                    >{{ retailer.webseite }}</a
+                  >
+                </v-col>
+              </v-row>
+
+              <v-row v-if="retailer.facebook">
+                <v-col cols="1">
+                  <v-icon>mdi-facebook</v-icon>
+                </v-col>
+                <v-col>
+                  <a
+                    :href="retailer.facebook"
+                    target="_blank"
+                    class="limit-text"
+                    >{{ retailer.facebook }}</a
+                  >
+                </v-col>
+              </v-row>
+
+              <v-row v-if="retailer.insta">
+                <v-col cols="1">
+                  <v-icon>mdi-instagram</v-icon>
+                </v-col>
+                <v-col>
+                  <a
+                    :href="retailer.insta"
+                    target="_blank"
+                    class="limit-text"
+                    >{{ retailer.insta }}</a
+                  >
                 </v-col>
               </v-row>
             </v-col>
 
             <v-col cols="6">
-              <iframe
-                width="560"
-                height="315"
-                :src="retailer.youtubevideo"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
+              <h2>Geschichte</h2>
+              {{ retailer.geschichte }}
+
+              <h2 class="mt-4">Sortiment</h2>
+              {{ retailer.sortiment }}
+
+              <div class="mt-4 ml-3">
+                <v-row> Bestellung: {{ retailer.bestellung }}</v-row>
+                <v-row> Bezahlen: {{ retailer.bezahlen }}</v-row>
+                <v-row> Lieferung: {{ retailer.lieferung }}</v-row>
+              </div>
             </v-col>
           </v-row>
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <div style="position: relativ:bottom: 0px;" class="impress">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
+        target="_blank"
+        >HÄNDLER REGISTRIERUNG</a
+      >
+      |
+      <a href="https://www.vrhood.de/impressum" target="_blank">IMPRESSUM</a> |
+      <a href="https://www.vrhood.de/datenschutz" target="_blank"
+        >DATENSCHUTZ</a
+      >
+    </div>
   </div>
 </template>
 
@@ -96,13 +170,13 @@ export default {
           text: "Name",
           align: "start",
           sortable: false,
-          value: "namenderfirma"
+          value: "name"
         },
         {
-          text: "Kategorie",
+          text: "Branche",
           align: "start",
           sortable: true,
-          value: "namenderfirma"
+          value: "branche"
         },
         { text: "", value: "actions", sortable: false }
       ]
@@ -124,4 +198,23 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.limit-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  display: block;
+}
+
+.impress {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.impress a {
+  color: black;
+}
+</style>
