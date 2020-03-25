@@ -11,7 +11,7 @@
       ></retailer-list>
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
-        :zoom="14"
+        :zoom="12"
         style="width: 70%; height: 100%"
         :options="{
           streetViewControl: false,
