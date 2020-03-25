@@ -24,8 +24,8 @@
           :key="index"
           v-for="(m, index) in retailers"
           :position="m.position"
-          :icon2="{
-            url: '/info-i_maps.png',
+          :icon="{
+            url: m.icon,
             scaledSize: { height: 32, width: 32 }
           }"
           :clickable="true"
