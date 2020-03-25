@@ -24,7 +24,7 @@
           :key="index"
           v-for="(m, index) in retailers"
           :position="m.position"
-          :icon="{
+          :icon2="{
             url: m.icon,
             scaledSize: { height: 32, width: 32 }
           }"
