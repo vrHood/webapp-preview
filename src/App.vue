@@ -7,12 +7,12 @@
       <retailer-list
         :retailers="retailers"
         ref="retailerList"
-        style="position:absolute; top: 0px;right: 0px;z-index:99; height: 100%; background-color: white;width:20%"
+        style="position:absolute; top: 0px;right: 0px;z-index:99; height: 100%; background-color: white;width:30%"
       ></retailer-list>
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
         :zoom="14"
-        style="width: 80%; height: 100%"
+        style="width: 70%; height: 100%"
         :options="{
           streetViewControl: false,
           fullscreenControl: false,
