@@ -7,12 +7,12 @@
       <retailer-list
         :retailers="retailers"
         ref="retailerList"
-        style="position:absolute; top: 0px;right: 0px;z-index:9999; height: 100%; background-color: white;"
+        style="position:absolute; top: 0px;right: 0px;z-index:99; height: 100%; background-color: white;width:20%"
       ></retailer-list>
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
         :zoom="14"
-        style="width: 100%; height: 100%"
+        style="width: 80%; height: 100%"
         :options="{
           streetViewControl: false,
           fullscreenControl: false,
@@ -24,7 +24,7 @@
           :key="index"
           v-for="(m, index) in retailers"
           :position="m.position"
-          :icon="{
+          :icon2="{
             url: '/info-i_maps.png',
             scaledSize: { height: 32, width: 32 }
           }"
@@ -414,8 +414,6 @@ export default {
     this.retailers = data.feed.entry
       .map((x) => ext(x))
       .filter((x) => parseInt(x.aktiv, 10));
-
-    console.log(this.retailers);
   }
 };
 </script>
@@ -428,5 +426,9 @@ body,
   height: 100%;
   padding: 0px;
   margin: 0px;
+}
+
+gm-bundled-control-on-bottom div {
+  right: 500px;
 }
 </style>

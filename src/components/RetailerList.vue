@@ -97,7 +97,7 @@
                     :href="retailer.facebook"
                     target="_blank"
                     class="limit-text"
-                    >{{ retailer.facebook }}</a
+                    >{{ formatUrlText(retailer.facebook) }}</a
                   >
                 </v-col>
               </v-row>
@@ -111,23 +111,36 @@
                     :href="retailer.insta"
                     target="_blank"
                     class="limit-text"
-                    >{{ retailer.insta }}</a
+                    >{{ formatUrlText(retailer.insta) }}</a
                   >
                 </v-col>
               </v-row>
             </v-col>
 
-            <v-col cols="6">
-              <h2 class="primary--text">Geschichte</h2>
-              {{ retailer.geschichte }}
+            <v-col cols="8">
+              <div v-if="retailer.geschichte">
+                <h2 class="primary--text">Geschichte</h2>
+                {{ retailer.geschichte }}
+              </div>
 
-              <h2 class="mt-4 primary--text">Sortiment</h2>
-              {{ retailer.sortiment }}
+              <div v-if="retailer.sortiment">
+                <h2 class="mt-4 primary--text">Sortiment</h2>
+                {{ retailer.sortiment }}
+              </div>
 
               <div class="mt-4 ml-3">
-                <v-row> Bestellung: {{ retailer.bestellung }}</v-row>
-                <v-row> Bezahlen: {{ retailer.bezahlen }}</v-row>
-                <v-row> Lieferung: {{ retailer.lieferung }}</v-row>
+                <v-row class="mt-1">
+                  <b class="width-list">Bestellung: </b>
+                  {{ retailer.bestellung }}</v-row
+                >
+                <v-row class="mt-1">
+                  <b class="width-list">Bezahlen: </b>
+                  {{ retailer.bezahlen }}</v-row
+                >
+                <v-row class="mt-1">
+                  <b class="width-list">Lieferung: </b>
+                  {{ retailer.lieferung }}</v-row
+                >
               </div>
             </v-col>
           </v-row>
@@ -189,6 +202,12 @@ export default {
   watch: {},
 
   methods: {
+    formatUrlText(text) {
+      return text
+        .replace("https://", "")
+        .replace("http://", "")
+        .split("/")[1];
+    },
     selectRetailer(retailer) {
       this.dialog = true;
       this.retailer = retailer;
@@ -221,5 +240,10 @@ export default {
 
 .icon-col {
   max-width: 50px;
+}
+
+.width-list {
+  display: inline-block;
+  width: 90px;
 }
 </style>
