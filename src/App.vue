@@ -16,12 +16,11 @@
       </v-navigation-drawer>
 
       <v-content>
-        <retailer-dialog ref="retailerDialog"></retailer-dialog>
-
         <div
           style="position:absolute; z-index:99; right:5px;top:28px;"
           class="mt-2"
         >
+          <retailer-dialog ref="retailerDialog"></retailer-dialog>
           <v-btn class="mx-2 primary" fab dark>
             <v-app-bar-nav-icon
               @click.stop="drawer = !drawer"
