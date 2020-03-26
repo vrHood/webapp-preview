@@ -1,43 +1,57 @@
 <template>
   <div id="app">
     <v-app>
-      <retailer-dialog
-        style="position:absolute; bottom: 10px;left:45%;z-index:9999"
-      ></retailer-dialog>
-      <retailer-list
-        :retailers="retailers"
-        ref="retailerList"
-        style="position:absolute; top: 0px;right: 0px;z-index:99; height: 100%; background-color: white;width:30%"
-      ></retailer-list>
-      <GmapMap
-        :center="{ lat: 49.0134297, lng: 12.1016236 }"
-        :zoom="12"
-        style="width: 70%; height: 100%"
-        :options="{
-          streetViewControl: false,
-          fullscreenControl: false,
-          mapTypeControl: false,
-          styles: map
-        }"
+      <v-navigation-drawer
+        absolute
+        right
+        v-model="drawer"
+        enable-resize-watcher
+        app
+        width="500"
       >
-        <GmapMarker
-          :key="index"
-          v-for="(m, index) in retailers"
-          :position="m.position"
-          :icon2="{
-            url: m.icon,
-            scaledSize: { height: 32, width: 32 }
+        <retailer-list
+          :retailers="retailers"
+          ref="retailerList"
+        ></retailer-list>
+      </v-navigation-drawer>
+
+      <v-content>
+        <div
+          style="position:absolute; z-index:99; right:5px;top:28px;"
+          class="mt-2"
+        >
+          <v-btn class="mx-2 primary" fab dark>
+            <v-app-bar-nav-icon
+              @click.stop="drawer = !drawer"
+            ></v-app-bar-nav-icon>
+          </v-btn>
+        </div>
+        <GmapMap
+          :center="{ lat: 49.0134297, lng: 12.1016236 }"
+          :zoom="12"
+          style="width: 100%; height: 100%"
+          :options="{
+            streetViewControl: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+            styles: map
           }"
-          :clickable="true"
-          @click="selectRetailer(m)"
-        />
-      </GmapMap>
+        >
+          <GmapMarker
+            :key="index"
+            v-for="(m, index) in retailers"
+            :position="m.position"
+            :icon="m.icon"
+            :clickable="true"
+            @click="selectRetailer(m)"
+          />
+        </GmapMap>
+      </v-content>
     </v-app>
   </div>
 </template>
 
 <script>
-import RetailerDialog from "./components/RetailerDialog";
 import RetailerList from "./components/RetailerList";
 
 function ext(row) {
@@ -54,16 +68,24 @@ function ext(row) {
     lng: parseFloat(result.lng)
   };
 
+  /*if (result.icon) {
+    result.icon = {
+      url: result.icon,
+      scaledSize: { height: 32, width: 32 }
+    };
+  }*/
+  delete result.icon;
+
   return result;
 }
 
 export default {
   components: {
-    RetailerDialog,
     RetailerList
   },
   data() {
     return {
+      drawer: true,
       retailers: [],
       retailer: {},
       map: [
@@ -407,6 +429,10 @@ export default {
   },
 
   async mounted() {
+    if (this.$vuetify.breakpoint.name === "xs") {
+      this.drawer = false;
+    }
+
     const { data } = await this.axios.get(
       "https://spreadsheets.google.com/feeds/list/1l6Lzh20BLcN_Gl4dvwmZ8cbmyJ5jIuIOx7Pn3KPN0pg/1/public/full?alt=json"
     );

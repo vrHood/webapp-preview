@@ -1,43 +1,59 @@
 <template>
-  <div v-if="retailers">
-    <v-card>
-      <div style="background-color: #4ba797;" class="pa-4">
-        <img
-          src="https://www.vrhood.de/wp-content/uploads/2020/03/vrhood-logo-white.svg"
-          style="height:80px;"
-        />
-      </div>
-      <v-card-title>
-        Händler
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Suche"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        :headers="headers"
-        :items="retailers"
-        :items-per-page="25"
-        style="height:100%"
-        :search="search"
+  <div v-if="retailers" style="height:100%;display:flex; flex-direction:column">
+    <div style="background-color: #4ba797;" class="pa-4">
+      <img
+        src="https://www.vrhood.de/wp-content/uploads/2020/03/vrhood-logo-white.svg"
+        style="height:80px;"
+      />
+    </div>
+    <v-card-title>
+      Händler
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Suche"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="retailers"
+      :items-per-page="25"
+      :search="search"
+    >
+      <template v-slot:item.actions="{ item }"
+        ><v-btn @click="selectRetailer(item)" text
+          ><v-icon>mdi-eye-outline</v-icon></v-btn
+        ></template
       >
-        <template v-slot:item.actions="{ item }"
-          ><v-btn @click="selectRetailer(item)" text
-            ><v-icon>mdi-eye-outline</v-icon></v-btn
-          ></template
-        >
-      </v-data-table>
-    </v-card>
+    </v-data-table>
+
+    <div class="impress">
+      <v-btn
+        class="primary mb-3"
+        target="_blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
+      >
+        Händler Registrierung</v-btn
+      ><br />
+      <a href="https://www.vrhood.de/impressum" target="_blank">IMPRESSUM</a>
+      |
+      <a href="https://www.vrhood.de/datenschutz" target="_blank"
+        >DATENSCHUTZ</a
+      >
+    </div>
+
+    <!---    <v-card style="position:absolute; bottom: 10px;left:45%;z-index:9999">
+
+    </v-card>-->
 
     <v-dialog v-model="dialog" max-width="1000">
       <v-card v-if="retailer.name">
         <v-card-text class="pa-4">
           <v-row>
-            <v-col cols="4">
+            <v-col lg="4" cols="12">
               <h1 class="primary--text ml-1 mb-4">{{ retailer.name }}</h1>
 
               <v-row>
@@ -117,7 +133,7 @@
               </v-row>
             </v-col>
 
-            <v-col cols="8">
+            <v-col cols="12" lg="8">
               <div v-if="retailer.geschichte">
                 <h2 class="primary--text">Geschichte</h2>
                 {{ retailer.geschichte }}
@@ -147,20 +163,6 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-
-    <div style="position: relativ:bottom: 0px;" class="impress">
-      <v-btn
-        class="primary mb-3"
-        target="_blank"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSd2N11xmbKPPcTXwX92BobqYvlkzyYt7bXLvNsSk6LJD1Sf6g/viewform"
-      >
-        Händler Registrierung</v-btn
-      ><br />
-      <a href="https://www.vrhood.de/impressum" target="_blank">IMPRESSUM</a> |
-      <a href="https://www.vrhood.de/datenschutz" target="_blank"
-        >DATENSCHUTZ</a
-      >
-    </div>
   </div>
 </template>
 
@@ -176,6 +178,7 @@ export default {
 
   data() {
     return {
+      drawer: true,
       retailer: {},
       search: "",
       dialog: false,
@@ -227,17 +230,6 @@ export default {
   display: block;
 }
 
-.impress {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-}
-
-.impress a {
-  color: black;
-}
-
 .icon-col {
   max-width: 50px;
 }
@@ -245,5 +237,16 @@ export default {
 .width-list {
   display: inline-block;
   width: 90px;
+}
+
+.impress {
+  text-align: center;
+  z-index: 99999;
+  height: 80px;
+  margin-top: auto;
+}
+
+.impress a {
+  color: black;
 }
 </style>
