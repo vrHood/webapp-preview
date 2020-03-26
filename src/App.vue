@@ -11,11 +11,13 @@
       >
         <retailer-list
           :retailers="retailers"
-          ref="retailerList"
+          @selectRetailer="selectRetailer"
         ></retailer-list>
       </v-navigation-drawer>
 
       <v-content>
+        <retailer-dialog ref="retailerDialog"></retailer-dialog>
+
         <div
           style="position:absolute; z-index:99; right:5px;top:28px;"
           class="mt-2"
@@ -53,6 +55,7 @@
 
 <script>
 import RetailerList from "./components/RetailerList";
+import RetailerDialog from "./components/RetailerDialog";
 
 function ext(row) {
   const result = Object.keys(row).reduce((acc, x) => {
@@ -81,7 +84,8 @@ function ext(row) {
 
 export default {
   components: {
-    RetailerList
+    RetailerList,
+    RetailerDialog
   },
   data() {
     return {
@@ -424,7 +428,7 @@ export default {
   },
   methods: {
     selectRetailer(retailer) {
-      this.$refs.retailerList.selectRetailer(retailer);
+      this.$refs.retailerDialog.selectRetailer(retailer);
     }
   },
 
