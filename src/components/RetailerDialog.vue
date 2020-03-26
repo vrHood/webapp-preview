@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="1000" width="500">
+  <v-dialog v-model="dialog" max-width="1000">
     <v-card v-if="retailer.name">
       <v-card-text class="pa-4">
         <v-row>
