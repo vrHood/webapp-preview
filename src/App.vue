@@ -1,55 +1,52 @@
 <template>
-  <div id="app">
-    <v-app>
-      <v-navigation-drawer
-        absolute
-        right
-        v-model="drawer"
-        enable-resize-watcher
-        app
-        width="500"
-      >
-        <retailer-list
-          :retailers="retailers"
-          @selectRetailer="selectRetailer"
-        ></retailer-list>
-      </v-navigation-drawer>
+  <v-app>
+    <v-navigation-drawer
+      right
+      v-model="drawer"
+      enable-resize-watcher
+      app
+      width="500"
+    >
+      <retailer-list
+        :retailers="retailers"
+        @selectRetailer="selectRetailer"
+      ></retailer-list>
+    </v-navigation-drawer>
 
-      <v-content>
-        <div
-          style="position:absolute; z-index:99; right:5px;top:28px;"
-          class="mt-2"
-        >
-          <retailer-dialog ref="retailerDialog"></retailer-dialog>
-          <v-btn class="mx-2 primary" fab dark>
-            <v-app-bar-nav-icon
-              @click.stop="drawer = !drawer"
-            ></v-app-bar-nav-icon>
-          </v-btn>
-        </div>
-        <GmapMap
-          :center="{ lat: 49.0134297, lng: 12.1016236 }"
-          :zoom="12"
-          style="width: 100%; height: 100%"
-          :options="{
-            streetViewControl: false,
-            fullscreenControl: false,
-            mapTypeControl: false,
-            styles: map
-          }"
-        >
-          <GmapMarker
-            :key="index"
-            v-for="(m, index) in retailers"
-            :position="m.position"
-            :icon="m.icon"
-            :clickable="true"
-            @click="selectRetailer(m)"
-          />
-        </GmapMap>
-      </v-content>
-    </v-app>
-  </div>
+    <v-content>
+      <retailer-dialog ref="retailerDialog"></retailer-dialog>
+      <div
+        style="position:absolute; z-index:99; right:5px;top:28px;"
+        class="mt-2"
+      >
+        <v-btn class="mx-2 primary" fab dark>
+          <v-app-bar-nav-icon
+            @click.stop="drawer = !drawer"
+          ></v-app-bar-nav-icon>
+        </v-btn>
+      </div>
+      <GmapMap
+        :center="{ lat: 49.0134297, lng: 12.1016236 }"
+        :zoom="12"
+        style="width: 100%; height: 100%"
+        :options="{
+          streetViewControl: false,
+          fullscreenControl: false,
+          mapTypeControl: false,
+          styles: map
+        }"
+      >
+        <GmapMarker
+          :key="index"
+          v-for="(m, index) in retailers"
+          :position="m.position"
+          :icon="m.icon"
+          :clickable="true"
+          @click="selectRetailer(m)"
+        />
+      </GmapMap>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -89,6 +86,7 @@ export default {
   data() {
     return {
       drawer: false,
+      dialog: false,
       retailers: [],
       retailer: {},
       map: [
@@ -450,17 +448,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-
-gm-bundled-control-on-bottom div {
-  right: 500px;
-}
-</style>
+<style lang="scss"></style>
