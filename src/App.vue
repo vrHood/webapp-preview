@@ -85,7 +85,7 @@ export default {
   },
   data() {
     return {
-      drawer: true,
+      drawer: false,
       retailers: [],
       retailer: {},
       map: [
@@ -428,11 +428,14 @@ export default {
     }
   },
 
-  async mounted() {
-    if (this.$vuetify.breakpoint.name === "xs") {
-      this.drawer = false;
-    }
+  computed: {},
 
+  watch: {},
+
+  async mounted() {
+    if (this.$vuetify.breakpoint.smAndUp) {
+      this.drawer = true;
+    }
     const { data } = await this.axios.get(
       "https://spreadsheets.google.com/feeds/list/1l6Lzh20BLcN_Gl4dvwmZ8cbmyJ5jIuIOx7Pn3KPN0pg/1/public/full?alt=json"
     );

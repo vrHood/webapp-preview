@@ -53,7 +53,7 @@
       <v-card v-if="retailer.name">
         <v-card-text class="pa-4">
           <v-row>
-            <v-col lg="4" cols="12">
+            <v-col cols="12" lg="4">
               <h1 class="primary--text ml-1 mb-4">{{ retailer.name }}</h1>
 
               <v-row>
