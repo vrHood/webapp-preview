@@ -20,7 +20,7 @@
     <v-data-table
       :headers="headers"
       :items="retailers"
-      :items-per-page="25"
+      :items-per-page="10"
       :search="search"
     >
       <template v-slot:item.actions="{ item }"
@@ -71,7 +71,6 @@ export default {
         {
           text: "Name",
           align: "start",
-          sortable: false,
           value: "name"
         },
         {
