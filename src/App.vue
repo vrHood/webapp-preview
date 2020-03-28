@@ -1,11 +1,18 @@
 <template>
   <v-app>
+    <div style="position:fixed; z-index:99; right:5px;top:25px;">
+      <v-btn class="mx-2 primary" fab dark>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-btn>
+    </div>
+
     <v-navigation-drawer
       right
       v-model="drawer"
       enable-resize-watcher
       app
       width="500"
+      style="overflow:hidden;"
     >
       <retailer-list
         :retailers="retailers"
@@ -15,16 +22,7 @@
 
     <v-content>
       <retailer-dialog ref="retailerDialog"></retailer-dialog>
-      <div
-        style="position:absolute; z-index:99; right:5px;top:10px;"
-        class="mt-2"
-      >
-        <v-btn class="mx-2 primary" fab dark>
-          <v-app-bar-nav-icon
-            @click.stop="drawer = !drawer"
-          ></v-app-bar-nav-icon>
-        </v-btn>
-      </div>
+
       <GmapMap
         :center="{ lat: 49.0134297, lng: 12.1016236 }"
         :zoom="12"
@@ -448,4 +446,9 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+html,
+body {
+  overflow: hidden !important;
+}
+</style>

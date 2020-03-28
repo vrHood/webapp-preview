@@ -1,34 +1,31 @@
 <template>
-  <div v-if="retailers" style="height:100%;display:flex; flex-direction:column">
-    <div style="background-color: #4ba797;" class="pa-4">
-      <img
-        src="https://www.vrhood.de/wp-content/uploads/2020/03/vrhood-logo-white.svg"
-        style="height:80px;"
-      />
-    </div>
-    <v-card-title>
-      Händler
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Suche"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="retailers"
-      :items-per-page="10"
-      :search="search"
-    >
-      <template v-slot:item.actions="{ item }"
-        ><v-btn @click="$emit('selectRetailer', item)" text
-          ><v-icon>mdi-eye-outline</v-icon></v-btn
-        ></template
+  <div style="height:100%;display:flex; flex-direction:column;">
+    <v-flex>
+      <div style="background-color: #4ba797;" class="pa-4">
+        <img
+          src="https://www.vrhood.de/wp-content/uploads/2020/03/vrhood-logo-white.svg"
+          style="height:80px;"
+        />
+      </div>
+
+      <div class="px-4 pb-2">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Suche"
+          single-line
+          hide-details
+        ></v-text-field>
+      </div>
+      <v-data-table
+        :headers="headers"
+        :items="retailers"
+        :items-per-page="10"
+        :search="search"
+        @click:row="(item) => $emit('selectRetailer', item)"
       >
-    </v-data-table>
+      </v-data-table>
+    </v-flex>
 
     <div class="impress">
       <v-btn
@@ -78,8 +75,7 @@ export default {
           align: "start",
           sortable: true,
           value: "branche"
-        },
-        { text: "", value: "actions", sortable: false }
+        }
       ]
     };
   },
@@ -98,8 +94,9 @@ export default {
 .impress {
   text-align: center;
   z-index: 99999;
-  height: 80px;
   margin-top: auto;
+  min-height: 120px;
+  position: relative;
 }
 
 .impress a {
